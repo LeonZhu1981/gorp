@@ -6,10 +6,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	_ "github.com/go-sql-driver/mysql"
-	_ "github.com/lib/pq"
-	_ "github.com/mattn/go-sqlite3"
-	_ "github.com/ziutek/mymysql/godrv"
 	"log"
 	"math/rand"
 	"os"
@@ -17,6 +13,11 @@ import (
 	"strings"
 	"testing"
 	"time"
+
+	_ "github.com/go-sql-driver/mysql"
+	_ "github.com/lib/pq"
+	_ "github.com/mattn/go-sqlite3"
+	_ "github.com/ziutek/mymysql/godrv"
 )
 
 // verify interface compliance
@@ -1957,6 +1958,9 @@ func connect(driver string) *sql.DB {
 	if dsn == "" {
 		panic("GORP_TEST_DSN env variable is not set. Please see README.md")
 	}
+
+	fmt.Printf("dsn---------------------:%s\r\n", dsn)
+	//dsn = "tcp:10.16.78.67:3306*test/root/Newegg@123"
 
 	db, err := sql.Open(driver, dsn)
 	if err != nil {
